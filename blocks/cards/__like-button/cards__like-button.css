@@ -10,6 +10,7 @@
   background-image: url("../../../images/cards/like-button.svg");
   background-repeat: no-repeat;
   background-position: center;
+  outline: none;
 }
 
 .cards__like-button:hover {
