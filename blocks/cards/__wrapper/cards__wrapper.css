@@ -1,0 +1,6 @@
+.cards__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  width: 100%;
+}

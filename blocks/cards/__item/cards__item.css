@@ -1,0 +1,9 @@
+.cards__item {
+  display: flex;
+  flex-direction: column;
+  max-width: 282px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  place-self: center;
+}
