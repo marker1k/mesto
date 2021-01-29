@@ -32,9 +32,9 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 850px) {
   .cards {
-    grid-column-gap: 17px;
+    width: 80%;
   }
 }
 
