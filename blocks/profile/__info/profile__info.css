@@ -1,9 +1,9 @@
 .profile__info {
-  max-width: 90%;
+  max-width: 50%;
 }
 
-/* @media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .profile__info {
-    width: 50%;
+    max-width: 90%;
   }
-} */
+}
