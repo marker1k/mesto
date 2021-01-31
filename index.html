@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 </head>
 <body class="page">
   <div class="page__container">
-    <header class="section header">
+    <header class="header">
       <img class="header__logo" src="./images/header/logo.svg" alt="Логотип" />
     </header>
 
@@ -72,24 +72,24 @@
           </div>
         </div>
       </section>
-
-      <section class="popup">
-        <div class="popup__container">
-          <button class="popup__close-button"></button>
-          <h2 class="popup__heading">Редактировать профиль</h2>
-          <form class="popup__form">
-            <input class="popup__input popup__title" placeholder="Заголовок" type="text">
-            <input class="popup__input popup__subtitle" placeholder="Подзаголовок" type="text">
-            <input class="popup__submit-button" type="submit" value="Сохранить">
-          </form>
-        </div>
-      </section>
     </main>
     <footer class="section footer">
       <p class="footer__text">
         © 2020 Mesto Russia
       </p>
     </footer>
+
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <form class="popup__form" name="popup-form">
+          <input class="popup__input popup__input_name_title" placeholder="Заголовок" type="text" name="title">
+          <input class="popup__input popup__input_name_subtitle" placeholder="Подзаголовок" type="text" name="subtitle">
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
   </div>
   <script src="./scripts/main.js"></script>
 </body>
