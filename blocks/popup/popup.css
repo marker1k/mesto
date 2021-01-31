@@ -6,13 +6,8 @@
   right: 0;
   bottom: 0;
   background: rgba(0,0,0,0.5);
-  padding-top: 15%;
   padding-left: 19px;
   padding-right: 19px;
-}
-
-@media screen and (max-width: 600px) {
-  .popup {
-    padding-top: 123px;
-  }
+  align-items: center;
+  justify-content: center;
 }
