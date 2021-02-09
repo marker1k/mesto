@@ -58,6 +58,8 @@ let handleSubmit = (e) => {
   } else if (popupContainer.classList.contains('popup_type_add-card')) {
     const placeName = popupContainer.querySelector('.popup__input_place_title');
     const placeLink = popupContainer.querySelector('.popup__input_place_link');
+    const newCard = makeCard(placeName.value, placeLink.value);
+    cardsContainer.prepend(newCard);
   }
   closePopup();
 };
@@ -98,6 +100,16 @@ const makePopup = (
   return popup;
 }
 
+const makeCard = (cardName, cardLink) => {
+  const card = cardTemplate.content.cloneNode(true);
+  const cardImage = card.querySelector('.cards__image');
+  const cardHeading = card.querySelector('.cards__title');
+  cardHeading.textContent = cardName;
+  cardImage.alt = cardName;
+  cardImage.src = cardLink;
+  return card;
+}
+
 const editProfile = () => {
   const editProfilePopup = makePopup(
     'Редактировать профиль',
@@ -122,11 +134,11 @@ const addCard = () => {
     'popup__input_place_title',
     'Название',
     'title',
-    profileTitle.innerText,
+    '',
     'popup__input_place_link',
     'Ссылка на картинку',
     'link',
-    profileSubtitle.innerText,
+    '',
     'popup_type_add-card'
   );
   popupElement.append(addCardPopup);
@@ -138,13 +150,7 @@ profileAddCardButton.addEventListener('click', addCard);
 
 const renderCards = () => {
   const cardsElements = cards.map((card) => {
-    const newCard = cardTemplate.content.cloneNode(true);
-    const newCardImage = newCard.querySelector('.cards__image');
-    const newCardHeading = newCard.querySelector('.cards__title');
-    newCardImage.src = card.link;
-    newCardImage.alt = card.name;
-    newCardHeading.textContent = card.name;
-    return newCard;
+    return makeCard(card.name, card.link);
   });
 
   cardsContainer.append(...cardsElements);
