@@ -28,50 +28,8 @@
         <button class="profile__add-button" type="button"></button>
       </section>
 
-      <section class="section cards">
-        <!-- <div class="cards__item">
-          <img class="cards__image" src="./images/cards/karachaevsk.jpg" alt="Карачаевск" />
-          <div class="cards__wrapper">
-            <h2 class="cards__title">Карачаевск</h2>
-            <button class="cards__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="cards__item">
-          <img class="cards__image" src="./images/cards/gora-elbrus-1.jpg" alt="Гора Эльбрус" />
-          <div class="cards__wrapper">
-            <h2 class="cards__title">Гора Эльбрус</h2>
-            <button class="cards__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="cards__item">
-          <img class="cards__image" src="./images/cards/dombai-1.jpg" alt="Домбай" />
-          <div class="cards__wrapper">
-            <h2 class="cards__title">Домбай</h2>
-            <button class="cards__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="cards__item">
-          <img class="cards__image" src="./images/cards/gora-elbrus-2.jpg" alt="Гора Эльбрус" />
-          <div class="cards__wrapper">
-            <h2 class="cards__title">Гора Эльбрус</h2>
-            <button class="cards__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="cards__item">
-          <img class="cards__image" src="./images/cards/dombai-2.jpg" alt="Домбай" />
-          <div class="cards__wrapper">
-            <h2 class="cards__title">Домбай</h2>
-            <button class="cards__like-button" type="button"></button>
-          </div>
-        </div>
-        <div class="cards__item">
-          <img class="cards__image" src="./images/cards/karachaevo-cherkessia.jpg" alt="Карачаево-Черкессия" />
-          <div class="cards__wrapper">
-            <h2 class="cards__title">Карачаево-Черкессия</h2>
-            <button class="cards__like-button" type="button"></button>
-          </div>
-        </div> -->
-      </section>
+      <section class="section cards"></section>
+
     </main>
     <footer class="section footer">
       <p class="footer__text">
@@ -80,15 +38,7 @@
     </footer>
 
     <section class="popup">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
-        <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form">
-          <input class="popup__input popup__input_name_title" placeholder="Заголовок" type="text" name="title">
-          <input class="popup__input popup__input_name_subtitle" placeholder="Подзаголовок" type="text" name="subtitle">
-          <button class="popup__submit-button" type="submit">Сохранить</button>
-        </form>
-      </div>
+
     </section>
   </div>
 
@@ -99,6 +49,18 @@
         <h2 class="cards__title"></h2>
         <button class="cards__like-button" type="button"></button>
       </div>
+    </div>
+  </template>
+
+  <template id="popup">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="popup__heading"></h2>
+      <form class="popup__form" name="popup-form">
+        <input class="popup__input" placeholder="" type="text" name="title">
+        <input class="popup__input" placeholder="" type="text" name="subtitle">
+        <button class="popup__submit-button" type="submit">Сохранить</button>
+      </form>
     </div>
   </template>
 
