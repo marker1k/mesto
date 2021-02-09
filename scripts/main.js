@@ -46,7 +46,7 @@ const closePopup = () => {
   togglePopup();
 }
 
-let handleSubmit = (e) => {
+const handleSubmit = (e) => {
   e.preventDefault();
   const target = e.target;
   const popupContainer = target.closest('.popup__container');
@@ -63,6 +63,10 @@ let handleSubmit = (e) => {
   }
   closePopup();
 };
+
+const handleLikeButtonClick = (e) => {
+  e.target.classList.toggle('cards__like-button_active');
+}
 
 const makePopup = (
   popupHeading,
@@ -104,9 +108,11 @@ const makeCard = (cardName, cardLink) => {
   const card = cardTemplate.content.cloneNode(true);
   const cardImage = card.querySelector('.cards__image');
   const cardHeading = card.querySelector('.cards__title');
+  const cardLikeButton = card.querySelector('.cards__like-button');
   cardHeading.textContent = cardName;
   cardImage.alt = cardName;
   cardImage.src = cardLink;
+  cardLikeButton.addEventListener('click', handleLikeButtonClick);
   return card;
 }
 
