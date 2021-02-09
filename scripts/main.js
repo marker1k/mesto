@@ -25,21 +25,32 @@ const cards = [
   }
 ];
 
-let profile = document.querySelector('.profile');
-let profileEditButton = profile.querySelector('.profile__edit-button');
-let profileAddCardButton = profile.querySelector('.profile__add-button');
-let profileTitle = profile.querySelector('.profile__title');
-let profileSubtitle = profile.querySelector('.profile__subtitle');
+const profile = document.querySelector('.profile');
+const profileEditButton = profile.querySelector('.profile__edit-button');
+const profileAddCardButton = profile.querySelector('.profile__add-button');
+const profileTitle = profile.querySelector('.profile__title');
+const profileSubtitle = profile.querySelector('.profile__subtitle');
 const cardsContainer = document.querySelector('.cards');
 const popupElement = document.querySelector('.popup');
+const imagePopupElement = document.querySelector('.image-popup');
 
 
 const popupTemplate = document.querySelector('#popup');
 const cardTemplate = document.querySelector('#card');
+const imagePopupTemplate = document.querySelector('#image-popup');
 
-let togglePopup = () => {
+const togglePopup = () => {
   popupElement.classList.toggle('popup_visible');
 };
+
+const toggleImagePopup = () => {
+  imagePopupElement.classList.toggle('image-popup_visible');
+}
+
+const closeImagePopup = () => {
+  imagePopupElement.querySelector('.image-popup__container').remove();
+  toggleImagePopup();
+}
 
 const closePopup = () => {
   popupElement.querySelector('.popup__container').remove();
@@ -71,6 +82,11 @@ const handleLikeButtonClick = (e) => {
 const handleRemoveButtonClick = (e) => {
   const card = e.target.closest('.cards__item');
   card.remove();
+}
+
+const handleCardImageClick = (e) => {
+  imagePopupElement.append(makeImagePopup(e.target.src, e.target.alt));
+  toggleImagePopup();
 }
 
 const makePopup = (
@@ -120,7 +136,20 @@ const makeCard = (cardName, cardLink) => {
   cardImage.src = cardLink;
   cardLikeButton.addEventListener('click', handleLikeButtonClick);
   cardRemoveButton.addEventListener('click', handleRemoveButtonClick);
+  cardImage.addEventListener('click', handleCardImageClick);
   return card;
+}
+
+const makeImagePopup = (imagePopupLink, imagePopupText) => {
+  const imagePopup = imagePopupTemplate.content.cloneNode(true);
+  const imagePopupImage = imagePopup.querySelector('.image-popup__image');
+  const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
+  const imagePopupCloseButton = imagePopup.querySelector('.image-popup__close-button');
+  imagePopupImage.src = imagePopupLink;
+  imagePopupImage.alt = imagePopupText;
+  imagePopupCaption.textContent = imagePopupText;
+  imagePopupCloseButton.addEventListener('click', closeImagePopup);
+  return imagePopup;
 }
 
 const editProfile = () => {

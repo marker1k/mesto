@@ -37,9 +37,8 @@
       </p>
     </footer>
 
-    <section class="popup">
-
-    </section>
+    <section class="popup"></section>
+    <section class="image-popup"></section>
   </div>
 
   <template id="card">
@@ -63,6 +62,14 @@
         <button class="popup__submit-button" type="submit">Сохранить</button>
       </form>
     </div>
+  </template>
+
+  <template id="image-popup">
+    <fugure class="image-popup__container">
+      <button class="image-popup__close-button"></button>
+      <img class="image-popup__image" src="" alt=""/>
+      <figcaption class="image-popup__caption"></figcaption>
+    </fugure>
   </template>
 
   <script src="./scripts/main.js"></script>
