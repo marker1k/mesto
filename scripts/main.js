@@ -68,6 +68,11 @@ const handleLikeButtonClick = (e) => {
   e.target.classList.toggle('cards__like-button_active');
 }
 
+const handleRemoveButtonClick = (e) => {
+  const card = e.target.closest('.cards__item');
+  card.remove();
+}
+
 const makePopup = (
   popupHeading,
   firstInputClass,
@@ -109,10 +114,12 @@ const makeCard = (cardName, cardLink) => {
   const cardImage = card.querySelector('.cards__image');
   const cardHeading = card.querySelector('.cards__title');
   const cardLikeButton = card.querySelector('.cards__like-button');
+  const cardRemoveButton = card.querySelector('.cards__remove-button');
   cardHeading.textContent = cardName;
   cardImage.alt = cardName;
   cardImage.src = cardLink;
   cardLikeButton.addEventListener('click', handleLikeButtonClick);
+  cardRemoveButton.addEventListener('click', handleRemoveButtonClick);
   return card;
 }
 
