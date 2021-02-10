@@ -11,6 +11,18 @@
   border-radius: 10px;
 }
 
+@media screen and (min-width: 600px) {
+  .popup__container {
+    min-width: 430px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .popup__container {
+    min-width: 282px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .popup__container {
     padding-top: 25px;

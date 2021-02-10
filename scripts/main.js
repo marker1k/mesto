@@ -89,18 +89,7 @@ const handleCardImageClick = (e) => {
   toggleImagePopup();
 }
 
-const makePopup = (
-  popupHeading,
-  firstInputClass,
-  firstInputPlaceholder,
-  firstInputName,
-  firstInputValue,
-  secondInputClass,
-  secondInputPlaceholder,
-  secondInputName,
-  secondInputValue,
-  popupModificatorClass
-  ) => {
+const makePopup = (popupParameters) => {
   const popup = popupTemplate.content.cloneNode(true);
   const popupContainer = popup.querySelector('.popup__container');
   const popupHeadingElement = popup.querySelector('.popup__heading');
@@ -109,16 +98,16 @@ const makePopup = (
   const popupSubmitButton = popup.querySelector('.popup__submit-button');
   const popupCloseButton = popup.querySelector('.popup__close-button');
 
-  popupContainer.classList.add(popupModificatorClass);
-  popupHeadingElement.textContent = popupHeading;
-  popupFirstInputElement.classList.add(firstInputClass);
-  popupFirstInputElement.placeholder = firstInputPlaceholder;
-  popupFirstInputElement.name = firstInputName;
-  popupFirstInputElement.value = firstInputValue;
-  popupSecondInputElement.classList.add(secondInputClass);
-  popupSecondInputElement.placeholder = secondInputPlaceholder;
-  popupSecondInputElement.name = secondInputName;
-  popupSecondInputElement.value = secondInputValue;
+  popupContainer.classList.add(popupParameters.popupModificatorClass);
+  popupHeadingElement.textContent = popupParameters.popupHeading;
+  popupFirstInputElement.classList.add(popupParameters.firstInputClass);
+  popupFirstInputElement.placeholder = popupParameters.firstInputPlaceholder;
+  popupFirstInputElement.name = popupParameters.firstInputName;
+  popupFirstInputElement.value = popupParameters.firstInputValue;
+  popupSecondInputElement.classList.add(popupParameters.secondInputClass);
+  popupSecondInputElement.placeholder = popupParameters.secondInputPlaceholder;
+  popupSecondInputElement.name = popupParameters.secondInputName;
+  popupSecondInputElement.value = popupParameters.secondInputValue;
   popupCloseButton.addEventListener('click', closePopup);
   popupSubmitButton.addEventListener('click', handleSubmit);
 
@@ -153,36 +142,36 @@ const makeImagePopup = (imagePopupLink, imagePopupText) => {
 }
 
 const editProfile = () => {
-  const editProfilePopup = makePopup(
-    'Редактировать профиль',
-    'popup__input_name_title',
-    'Заголовок',
-    'title',
-    profileTitle.innerText,
-    'popup__input_name_subtitle',
-    'Подзаголовок',
-    'name',
-    profileSubtitle.innerText,
-    'popup_type_edit-profile'
-  );
+  const editProfilePopup = makePopup({
+    popupHeading: 'Редактировать профиль',
+    firstInputClass: 'popup__input_name_title',
+    firstInputPlaceholder: 'Заголовок',
+    firstInputName: 'title',
+    firstInputValue: profileTitle.innerText,
+    secondInputClass: 'popup__input_name_subtitle',
+    secondInputPlaceholder: 'Подзаголовок',
+    secondInputName: 'name',
+    secondInputValue: profileSubtitle.innerText,
+    popupModificatorClass: 'popup_type_edit-profile'
+  });
 
   popupElement.append(editProfilePopup);
   togglePopup();
 };
 
 const addCard = () => {
-  const addCardPopup = makePopup(
-    'Новое место',
-    'popup__input_place_title',
-    'Название',
-    'title',
-    '',
-    'popup__input_place_link',
-    'Ссылка на картинку',
-    'link',
-    '',
-    'popup_type_add-card'
-  );
+  const addCardPopup = makePopup({
+    popupHeading: 'Новое место',
+    firstInputClass: 'popup__input_place_title',
+    firstInputPlaceholder: 'Название',
+    firstInputName: 'title',
+    firstInputValue: '',
+    secondInputClass: 'popup__input_place_link',
+    secondInputPlaceholder: 'Ссылка на картинку',
+    secondInputName: 'link',
+    secondInputValue: '',
+    popupModificatorClass: 'popup_type_add-card'
+  });
   popupElement.append(addCardPopup);
   togglePopup();
 }
