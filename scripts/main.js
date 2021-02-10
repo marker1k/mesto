@@ -1,4 +1,4 @@
-const cards = [
+const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -126,6 +126,7 @@ const makeCard = (cardName, cardLink) => {
   cardLikeButton.addEventListener('click', handleLikeButtonClick);
   cardRemoveButton.addEventListener('click', handleRemoveButtonClick);
   cardImage.addEventListener('click', handleCardImageClick);
+
   return card;
 }
 
@@ -138,6 +139,7 @@ const makeImagePopup = (imagePopupLink, imagePopupText) => {
   imagePopupImage.alt = imagePopupText;
   imagePopupCaption.textContent = imagePopupText;
   imagePopupCloseButton.addEventListener('click', closeImagePopup);
+
   return imagePopup;
 }
 
@@ -179,12 +181,12 @@ const addCard = () => {
 profileEditButton.addEventListener('click', editProfile);
 profileAddCardButton.addEventListener('click', addCard);
 
-const renderCards = () => {
-  const cardsElements = cards.map((card) => {
+const renderInitialCards = () => {
+  const cardsElements = initialCards.map((card) => {
     return makeCard(card.name, card.link);
   });
 
   cardsContainer.append(...cardsElements);
 };
 
-renderCards();
+renderInitialCards();
