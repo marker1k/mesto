@@ -37,39 +37,48 @@
       </p>
     </footer>
 
-    <section class="popup"></section>
-    <section class="image-popup"></section>
+    <section class="popup popup_type_edit-profile">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <form class="popup__form">
+          <input class="popup__input popup__input_type_title" placeholder="Заголовок" type="text">
+          <input class="popup__input popup__input_type_subtitle" placeholder="Подзаголовок" type="text">
+          <input class="popup__submit-button" type="submit" value="Сохранить">
+        </form>
+      </div>
+    </section>
+
+    <section class="popup popup_type_add-card">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="popup__form">
+          <input class="popup__input popup__input_type_name" placeholder="Название" type="text">
+          <input class="popup__input popup__input_type_image-link" placeholder="Ссылка на картинку" type="text">
+          <input class="popup__submit-button" type="submit" value="Сохранить">
+        </form>
+      </div>
+    </section>
+
+    <section class="image-popup">
+      <fugure class="image-popup__container">
+        <button class="image-popup__close-button" type="button"></button>
+        <img class="image-popup__image"/>
+        <figcaption class="image-popup__caption"></figcaption>
+      </fugure>
+    </section>
   </div>
 
   <template id="card">
     <div class="cards__item">
-      <button class="cards__remove-button"></button>
+      <button class="cards__remove-button" type="button"></button>
       <img class="cards__image"/>
       <div class="cards__wrapper">
         <h2 class="cards__title"></h2>
         <button class="cards__like-button" type="button"></button>
       </div>
     </div>
-  </template>
-
-  <template id="popup">
-    <div class="popup__container">
-      <button class="popup__close-button" type="button"></button>
-      <h2 class="popup__heading"></h2>
-      <form class="popup__form" name="popup-form">
-        <input class="popup__input" placeholder="" type="text" name="title">
-        <input class="popup__input" placeholder="" type="text" name="subtitle">
-        <button class="popup__submit-button" type="submit">Сохранить</button>
-      </form>
-    </div>
-  </template>
-
-  <template id="image-popup">
-    <fugure class="image-popup__container">
-      <button class="image-popup__close-button"></button>
-      <img class="image-popup__image"/>
-      <figcaption class="image-popup__caption"></figcaption>
-    </fugure>
   </template>
 
   <script src="./scripts/main.js"></script>

@@ -31,48 +31,58 @@ const profileAddCardButton = profile.querySelector('.profile__add-button');
 const profileTitle = profile.querySelector('.profile__title');
 const profileSubtitle = profile.querySelector('.profile__subtitle');
 const cardsContainer = document.querySelector('.cards');
-const popupElement = document.querySelector('.popup');
-const imagePopupElement = document.querySelector('.image-popup');
 
+const editProfilePopup = document.querySelector('.popup_type_edit-profile');
+const editProfilePopupTitleInput = editProfilePopup.querySelector('.popup__input_type_title');
+const editProfilePopupSubtitleInput = editProfilePopup.querySelector('.popup__input_type_subtitle');
+const editProfileSubmitButton = editProfilePopup.querySelector('.popup__submit-button');
+const editProfileCloseButton = editProfilePopup.querySelector('.popup__close-button');
 
-const popupTemplate = document.querySelector('#popup');
+const addCardPopup = document.querySelector('.popup_type_add-card');
+const addCardPopupNameInput = addCardPopup.querySelector('.popup__input_type_name');
+const addCardPopupImageLinkInput = addCardPopup.querySelector('.popup__input_type_image-link');
+const addCardSubmitButton = addCardPopup.querySelector('.popup__submit-button');
+const addCardPopupCloseButton = addCardPopup.querySelector('.popup__close-button');
+
+const imagePopup = document.querySelector('.image-popup');
+const imagePopupImage = imagePopup.querySelector('.image-popup__image');
+const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
+const imagePopupCloseButton = imagePopup.querySelector('.image-popup__close-button');
+
 const cardTemplate = document.querySelector('#card');
-const imagePopupTemplate = document.querySelector('#image-popup');
 
-const togglePopup = () => {
-  popupElement.classList.toggle('popup_visible');
+const openPopup = (popup) => {
+  popup.classList.add('popup_visible');
+}
+
+const closePopup = (popup) => {
+  popup.classList.remove('popup_visible');
+}
+
+const editProfile = () => {
+  editProfilePopupTitleInput.value = profileTitle.textContent;
+  editProfilePopupSubtitleInput.value = profileSubtitle.textContent;
+  openPopup(editProfilePopup);
 };
 
-const toggleImagePopup = () => {
-  imagePopupElement.classList.toggle('image-popup_visible');
-}
-
-const closeImagePopup = () => {
-  imagePopupElement.querySelector('.image-popup__container').remove();
-  toggleImagePopup();
-}
-
-const closePopup = () => {
-  popupElement.querySelector('.popup__container').remove();
-  togglePopup();
-}
-
-const handleSubmit = (e) => {
+const handleEditProfileSubmit = (e) => {
   e.preventDefault();
-  const target = e.target;
-  const popupContainer = target.closest('.popup__container');
-  if (popupContainer.classList.contains('popup_type_edit-profile')) {
-    const popupTitle = popupContainer.querySelector('.popup__input_name_title');
-    const popupSubtitle = popupContainer.querySelector('.popup__input_name_subtitle');
-    profileTitle.innerText = popupTitle.value;
-    profileSubtitle.innerText = popupSubtitle.value;
-  } else if (popupContainer.classList.contains('popup_type_add-card')) {
-    const placeName = popupContainer.querySelector('.popup__input_place_title');
-    const placeLink = popupContainer.querySelector('.popup__input_place_link');
-    const newCard = makeCard(placeName.value, placeLink.value);
-    cardsContainer.prepend(newCard);
-  }
-  closePopup();
+  profileTitle.textContent = editProfilePopupTitleInput.value;
+  profileSubtitle.textContent = editProfilePopupSubtitleInput.value;
+  closePopup(editProfilePopup);
+};
+
+const addCard = () => {
+  addCardPopupNameInput.value = '';
+  addCardPopupImageLinkInput.value = '';
+  openPopup(addCardPopup);
+}
+
+const handleAddCardSubmit = (e) => {
+  e.preventDefault();
+  const newCard = makeCard(addCardPopupNameInput.value, addCardPopupImageLinkInput.value);
+  cardsContainer.prepend(newCard);
+  closePopup(addCardPopup);
 };
 
 const handleLikeButtonClick = (e) => {
@@ -85,33 +95,10 @@ const handleRemoveButtonClick = (e) => {
 }
 
 const handleCardImageClick = (e) => {
-  imagePopupElement.append(makeImagePopup(e.target.src, e.target.alt));
-  toggleImagePopup();
-}
-
-const makePopup = (popupParameters) => {
-  const popup = popupTemplate.content.cloneNode(true);
-  const popupContainer = popup.querySelector('.popup__container');
-  const popupHeadingElement = popup.querySelector('.popup__heading');
-  const popupFirstInputElement = popup.querySelectorAll('.popup__input')[0];
-  const popupSecondInputElement = popup.querySelectorAll('.popup__input')[1];
-  const popupSubmitButton = popup.querySelector('.popup__submit-button');
-  const popupCloseButton = popup.querySelector('.popup__close-button');
-
-  popupContainer.classList.add(popupParameters.popupModificatorClass);
-  popupHeadingElement.textContent = popupParameters.popupHeading;
-  popupFirstInputElement.classList.add(popupParameters.firstInputClass);
-  popupFirstInputElement.placeholder = popupParameters.firstInputPlaceholder;
-  popupFirstInputElement.name = popupParameters.firstInputName;
-  popupFirstInputElement.value = popupParameters.firstInputValue;
-  popupSecondInputElement.classList.add(popupParameters.secondInputClass);
-  popupSecondInputElement.placeholder = popupParameters.secondInputPlaceholder;
-  popupSecondInputElement.name = popupParameters.secondInputName;
-  popupSecondInputElement.value = popupParameters.secondInputValue;
-  popupCloseButton.addEventListener('click', closePopup);
-  popupSubmitButton.addEventListener('click', handleSubmit);
-
-  return popup;
+  imagePopupImage.src = e.target.src;
+  imagePopupImage.alt = e.target.alt;
+  imagePopupCaption.textContent = e.target.alt;
+  openPopup(imagePopup);
 }
 
 const makeCard = (cardName, cardLink) => {
@@ -130,56 +117,15 @@ const makeCard = (cardName, cardLink) => {
   return card;
 }
 
-const makeImagePopup = (imagePopupLink, imagePopupText) => {
-  const imagePopup = imagePopupTemplate.content.cloneNode(true);
-  const imagePopupImage = imagePopup.querySelector('.image-popup__image');
-  const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
-  const imagePopupCloseButton = imagePopup.querySelector('.image-popup__close-button');
-  imagePopupImage.src = imagePopupLink;
-  imagePopupImage.alt = imagePopupText;
-  imagePopupCaption.textContent = imagePopupText;
-  imagePopupCloseButton.addEventListener('click', closeImagePopup);
-
-  return imagePopup;
-}
-
-const editProfile = () => {
-  const editProfilePopup = makePopup({
-    popupHeading: 'Редактировать профиль',
-    firstInputClass: 'popup__input_name_title',
-    firstInputPlaceholder: 'Заголовок',
-    firstInputName: 'title',
-    firstInputValue: profileTitle.innerText,
-    secondInputClass: 'popup__input_name_subtitle',
-    secondInputPlaceholder: 'Подзаголовок',
-    secondInputName: 'name',
-    secondInputValue: profileSubtitle.innerText,
-    popupModificatorClass: 'popup_type_edit-profile'
-  });
-
-  popupElement.append(editProfilePopup);
-  togglePopup();
-};
-
-const addCard = () => {
-  const addCardPopup = makePopup({
-    popupHeading: 'Новое место',
-    firstInputClass: 'popup__input_place_title',
-    firstInputPlaceholder: 'Название',
-    firstInputName: 'title',
-    firstInputValue: '',
-    secondInputClass: 'popup__input_place_link',
-    secondInputPlaceholder: 'Ссылка на картинку',
-    secondInputName: 'link',
-    secondInputValue: '',
-    popupModificatorClass: 'popup_type_add-card'
-  });
-  popupElement.append(addCardPopup);
-  togglePopup();
-}
-
 profileEditButton.addEventListener('click', editProfile);
+editProfileSubmitButton.addEventListener('click', handleEditProfileSubmit);
+
 profileAddCardButton.addEventListener('click', addCard);
+addCardSubmitButton.addEventListener('click', handleAddCardSubmit);
+
+editProfileCloseButton.addEventListener('click', () => {closePopup(editProfilePopup)});
+addCardPopupCloseButton.addEventListener('click', () => {closePopup(addCardPopup)});
+imagePopupCloseButton.addEventListener('click', () => {closePopup(imagePopup)});
 
 const renderInitialCards = () => {
   const cardsElements = initialCards.map((card) => {

@@ -8,7 +8,6 @@
   background-color: rgba(0, 0, 0, 0.9);
   align-items: center;
   justify-content: center;
-
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s linear 300ms, opacity 300ms;
