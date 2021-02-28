@@ -143,23 +143,35 @@ editProfileSubmitButton.addEventListener('click', handleEditProfileSubmit);
 profileAddCardButton.addEventListener('click', addCard);
 addCardSubmitButton.addEventListener('click', handleAddCardSubmit);
 
-popupList.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-button')) {
-      const popupElement = evt.target.closest('.popup');
-      if (popupElement.classList.contains('popup_type_edit-profile')) {
-        closePopup(editProfilePopup);
-      } else if (popupElement.classList.contains('popup_type_add-card')) {
-        closePopup(addCardPopup);
-      }
+const handleClosePopup = () => {
+  const popupElement = popupList.find((popup) => {
+    if (popup.classList.contains('popup_visible')) {
+        return popup;
     }
   });
+  if (popupElement !== undefined) {
+    if (popupElement.classList.contains('popup_type_edit-profile')) {
+      closePopup(editProfilePopup);
+    } else if (popupElement.classList.contains('popup_type_add-card')) {
+      closePopup(addCardPopup);
+    } else if (popupElement.classList.contains('image-popup')) {
+      closePopup(imagePopup);
+    }
+  }
+}
+
+window.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    handleClosePopup();
+  }
 });
 
-imagePopup.addEventListener('click', (evt) => {
-  if (evt.target === evt.currentTarget || evt.target.classList.contains('image-popup__close-button')) {
-    closePopup(imagePopup);
-  }
+popupList.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('image-popup__close-button')) {
+      handleClosePopup(evt);
+    }
+  });
 });
 
 const renderInitialCards = () => {
