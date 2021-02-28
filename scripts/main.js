@@ -39,7 +39,7 @@ const editProfileInputList = Array.from(editProfilePopup.querySelectorAll('.popu
 const editProfileErrorList = Array.from(editProfilePopup.querySelectorAll('.popup__error'));
 const editProfilePopupTitleInput = editProfilePopup.querySelector('.popup__input_type_title');
 const editProfilePopupSubtitleInput = editProfilePopup.querySelector('.popup__input_type_subtitle');
-const editProfileForm = editProfilePopup.querySelector('.popup__form_type_edit-profile');
+const editProfileSubmitButton = editProfilePopup.querySelector('.popup__submit-button');
 const editProfileCloseButton = editProfilePopup.querySelector('.popup__close-button');
 
 const addCardPopup = document.querySelector('.popup_type_add-card');
@@ -47,7 +47,7 @@ const addCardInputList = Array.from(addCardPopup.querySelectorAll('.popup__input
 const addCardErrorList = Array.from(addCardPopup.querySelectorAll('.popup__error'));
 const addCardPopupNameInput = addCardPopup.querySelector('.popup__input_type_name');
 const addCardPopupImageLinkInput = addCardPopup.querySelector('.popup__input_type_image-link');
-const addCardForm = addCardPopup.querySelector('.popup__form_type_add-card');
+const addCardSubmitButton = addCardPopup.querySelector('.popup__submit-button');
 const addCardPopupCloseButton = addCardPopup.querySelector('.popup__close-button');
 
 const imagePopup = document.querySelector('.image-popup');
@@ -87,8 +87,6 @@ const editProfile = () => {
   clearErrors(editProfileInputList, editProfileErrorList);
   editProfileSubmitButton.classList.remove('popup__submit-button_disabled');
   editProfileSubmitButton.removeAttribute('disabled');
-  editProfilePopupTitleInput
-  editProfilePopupSubtitleInput
   editProfilePopupTitleInput.value = profileTitle.textContent;
   editProfilePopupSubtitleInput.value = profileSubtitle.textContent;
   openPopup(editProfilePopup);
@@ -150,10 +148,10 @@ const makeCard = (cardName, cardLink) => {
 }
 
 profileEditButton.addEventListener('click', editProfile);
-editProfileForm.addEventListener('submit', handleEditProfileSubmit);
+editProfileSubmitButton.addEventListener('click', handleEditProfileSubmit);
 
 profileAddCardButton.addEventListener('click', addCard);
-addCardForm.addEventListener('submit', handleAddCardSubmit);
+addCardSubmitButton.addEventListener('click', handleAddCardSubmit);
 
 const handleClosePopup = () => {
   const openedPopup = document.querySelector('.popup_visible');
