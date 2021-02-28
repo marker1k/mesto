@@ -15,13 +15,13 @@
   margin-top: 48px;
 }
 
+.popup__submit-button:hover {
+  opacity: 0.8;
+  transition: opacity .3s ease-out;
+}
+
 @media screen and (max-width: 768px) {
   .popup__submit-button {
     margin-top: 45px;
   }
-}
-
-.popup__submit-button:hover {
-  opacity: 0.8;
-  transition: opacity .3s ease-out;
 }
