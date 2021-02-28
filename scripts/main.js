@@ -57,6 +57,24 @@ const openPopup = (popup) => {
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_visible');
+  const popupButton = popup.querySelector('.popup__submit-button');
+  if (popup.classList.contains('popup_type_add-card')) {
+    popupButton.setAttribute('disabled', true);
+    popupButton.classList.add('popup__submit-button_disabled');
+  }
+  if (popup.classList.contains('popup_type_edit-profile')) {
+    const errorList = Array.from(document.querySelectorAll('.popup__error'));
+    const inputList = Array.from(document.querySelectorAll('.popup__input'));
+    errorList.forEach((error) => {
+      error.textContent = '';
+      error.classList.remove('popup__error_visible');
+    });
+    inputList.forEach((input) => {
+      input.classList.remove('popup__input_type_error');
+      popupButton.setAttribute('disabled', false);
+      popupButton.classList.remove('popup__submit-button_disabled');
+    });
+  }
 }
 
 const editProfile = () => {
