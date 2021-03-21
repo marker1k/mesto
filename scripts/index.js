@@ -1,29 +1,6 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import {initialCards} from './variables.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 const profile = document.querySelector('.profile');
 const profileEditButton = profile.querySelector('.profile__edit-button');
@@ -49,13 +26,6 @@ const addCardPopupNameInput = addCardPopup.querySelector('.popup__input_type_nam
 const addCardPopupImageLinkInput = addCardPopup.querySelector('.popup__input_type_image-link');
 const addCardSubmitButton = addCardPopup.querySelector('.popup__submit-button');
 const addCardPopupCloseButton = addCardPopup.querySelector('.popup__close-button');
-
-const imagePopup = document.querySelector('.image-popup');
-const imagePopupImage = imagePopup.querySelector('.image-popup__image');
-const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
-const imagePopupCloseButton = imagePopup.querySelector('.image-popup__close-button');
-
-const cardTemplate = document.querySelector('#card');
 
 const closeByEscape = (evt) => {
   if (evt.key === 'Escape') {
@@ -110,42 +80,11 @@ const addCard = () => {
 
 const handleAddCardSubmit = (e) => {
   e.preventDefault();
-  const newCard = makeCard(addCardPopupNameInput.value, addCardPopupImageLinkInput.value);
-  cardsContainer.prepend(newCard);
+  const newCard = new Card({name: addCardPopupNameInput.value, link: addCardPopupImageLinkInput.value}, '#card');
+  const newCardElement = newCard.generateCard();
+  cardsContainer.prepend(newCardElement);
   closePopup(addCardPopup);
 };
-
-const handleLikeButtonClick = (e) => {
-  e.target.classList.toggle('cards__like-button_active');
-}
-
-const handleRemoveButtonClick = (e) => {
-  const card = e.target.closest('.cards__item');
-  card.remove();
-}
-
-const handleCardImageClick = (e) => {
-  imagePopupImage.src = e.target.src;
-  imagePopupImage.alt = e.target.alt;
-  imagePopupCaption.textContent = e.target.alt;
-  openPopup(imagePopup);
-}
-
-const makeCard = (cardName, cardLink) => {
-  const card = cardTemplate.content.cloneNode(true);
-  const cardImage = card.querySelector('.cards__image');
-  const cardHeading = card.querySelector('.cards__title');
-  const cardLikeButton = card.querySelector('.cards__like-button');
-  const cardRemoveButton = card.querySelector('.cards__remove-button');
-  cardHeading.textContent = cardName;
-  cardImage.alt = cardName;
-  cardImage.src = cardLink;
-  cardLikeButton.addEventListener('click', handleLikeButtonClick);
-  cardRemoveButton.addEventListener('click', handleRemoveButtonClick);
-  cardImage.addEventListener('click', handleCardImageClick);
-
-  return card;
-}
 
 profileEditButton.addEventListener('click', editProfile);
 editProfileSubmitButton.addEventListener('click', handleEditProfileSubmit);
@@ -168,9 +107,23 @@ popupList.forEach((popup) => {
   });
 });
 
+const formList = Array.from(document.querySelectorAll('.popup__form'));
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator({
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  },
+  formElement);
+  formValidator.enableValidation();
+});
+
 const renderInitialCards = () => {
   const cardsElements = initialCards.map((card) => {
-    return makeCard(card.name, card.link);
+    const newCard = new Card(card, '#card');
+    return newCard.generateCard();
   });
 
   cardsContainer.append(...cardsElements);
