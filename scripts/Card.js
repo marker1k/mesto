@@ -1,14 +1,13 @@
-const imagePopup = document.querySelector('.image-popup');
-const imagePopupImage = imagePopup.querySelector('.image-popup__image');
-const imagePopupCaption = imagePopup.querySelector('.image-popup__caption');
-const imagePopupCloseButton = imagePopup.querySelector('.image-popup__close-button');
+import {openPopup, closePopup} from './utils.js';
 
 class Card {
   constructor(data, templateSelector) {
     this._name = data.name,
     this._link = data.link,
-    this._templateSelector = templateSelector
+    this._templateSelector = templateSelector,
+    this._popup = document.querySelector('.image-popup')
   }
+
   _getTemplate() {
     const cardElement = document
     .querySelector(this._templateSelector)
@@ -31,15 +30,17 @@ class Card {
     return this._element;
   }
 
-  _handleOpenPopup(e) {
-    imagePopup.classList.add('popup_visible');
+  _handleOpenPopup() {
+    openPopup(this._popup);
   }
 
   _handleClosePopup() {
-    imagePopup.classList.remove('popup_visible');
+    closePopup();
   }
 
   _handleCardImageClick(e) {
+    const imagePopupImage = this._popup.querySelector('.image-popup__image');
+    const imagePopupCaption = this._popup.querySelector('.image-popup__caption');
     imagePopupImage.src = e.target.src;
     imagePopupImage.alt = e.target.alt;
     imagePopupCaption.textContent = e.target.alt;
