@@ -35,12 +35,16 @@ const clearErrors = (inputList, errorList) => {
   });
 }
 
-const editProfile = () => {
-  clearErrors(editProfileInputList, editProfileErrorList);
+const resetProfileForm = () => {
   editProfileSubmitButton.classList.remove('popup__submit-button_disabled');
   editProfileSubmitButton.removeAttribute('disabled');
   editProfilePopupTitleInput.value = profileTitle.textContent;
   editProfilePopupSubtitleInput.value = profileSubtitle.textContent;
+}
+
+const editProfile = () => {
+  clearErrors(editProfileInputList, editProfileErrorList);
+  resetProfileForm();
   openPopup(editProfilePopup);
 };
 
